@@ -6,7 +6,7 @@
 /*   By: melkholy <melkholy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 21:27:02 by melkholy          #+#    #+#             */
-/*   Updated: 2022/09/17 00:29:46 by melkholy         ###   ########.fr       */
+/*   Updated: 2022/09/19 19:32:51 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,19 @@ typedef struct	s_data
 	int		endian;
 }				t_data;
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * \
-						(data->bites_per_pixel / 8));
-	*(unsigned int*)dst = color; 
-}
+// void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+// {
+// 	char	*dst;
+//
+// 	dst = data->addr + (y * data->line_length + x * \
+// 						(data->bites_per_pixel / 8));
+// 	*(unsigned int*)dst = color; 
+// }
 
 int	main(void)
 {
 	void	*mlx;
 	void	*mlx_win;
-	// t_data	im g;
 	int		count;
 	int		height;
 	int		width;

@@ -6,7 +6,7 @@
 /*   By: melkholy <melkholy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 18:58:22 by melkholy          #+#    #+#             */
-/*   Updated: 2022/09/19 02:42:36 by melkholy         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:35:54 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_explore(int row, int col, t_graph *graph)
 		rd = row + d_row[count];
 		cd = col + d_col[count];
 		count ++;
-		if (rd < 0 && rd >= 10 && cd > 0 && cd >= 20)
+		if ((rd < 0 || rd >= 10) && (cd > 0 || cd >= 20))
 			continue ;
 		if (graph->visit[rd][cd])
 			continue ;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   BFS.c                                              :+:      :+:    :+:   */
+/*   DFS.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melkholy <melkholy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 18:58:22 by melkholy          #+#    #+#             */
-/*   Updated: 2022/09/18 22:59:02 by melkholy         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:38:53 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,13 @@
 
 bool	ft_find_path(char **map, int row, int col, int **visited)
 {
-	bool	safe;
-
-	safe = false;
-	if (row >= 0 && row < 10 && col >= 0 && col < 20)
-		safe = true;
-	if (safe && map[row][col] != '1' && !visited[row][col])
+	if ((row < 0 || row >= 10) && (col < 0 || col >= 20))
+		return (false);
+	if (map[row][col] != '1' && !visited[row][col])
 	{
 		visited[row][col] = 1;
-		if (map[row][col] == 'E')
-			return (true);
+		// if (map[row][col] == 'E')
+		// 	return (true);
 		if (ft_find_path(map, row, col + 1, visited))
 			return (true);
 		if (ft_find_path(map, row, col - 1, visited))
@@ -93,7 +90,7 @@ int	main(void)
 	str[3] = "10000000000100000001";
 	str[4] = "1000000P000100000001";
 	str[5] = "10000000000111000001";
-	str[6] = "10000000011100000001";
+	str[6] = "10000000011000000001";
 	str[7] = "10000111100E10000001";
 	str[8] = "10000000011100000001";
 	str[9] = "11111111111111111111";
