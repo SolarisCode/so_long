@@ -6,7 +6,7 @@
 /*   By: melkholy <melkholy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:33:50 by melkholy          #+#    #+#             */
-/*   Updated: 2022/09/20 00:28:02 by melkholy         ###   ########.fr       */
+/*   Updated: 2022/09/20 00:35:18 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ bool	ft_check_wall(t_graph *graph)
 	if (ply_ex[0] != 1 || ply_ex[1] < 1 || graph->gems < 1)
 		valid = false;
 	free(ply_ex);
-	return (true);
+	return (valid);
 }
 
 bool	ft_get_map(char *file, t_graph *graph)
