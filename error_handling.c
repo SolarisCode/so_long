@@ -6,7 +6,7 @@
 /*   By: melkholy <melkholy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:33:50 by melkholy          #+#    #+#             */
-/*   Updated: 2022/09/20 22:16:03 by melkholy         ###   ########.fr       */
+/*   Updated: 2022/09/20 22:29:28 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "./ft_printf/ft_printf_bonus.h"
 #include "./ft_printf/libft/libft.h"
 
-typedef struct	s_graph
+typedef struct s_graph
 {
 	char	**map;
 	int		player[2];
@@ -26,7 +26,7 @@ typedef struct	s_graph
 	int		col;
 	int		gems;
 	int		gate;
-}				t_graph;
+}			t_graph;
 
 void	ft_free_2d(char **map)
 {
@@ -41,7 +41,7 @@ void	ft_free_2d(char **map)
 	free(map);
 }
 
-int	ft_check_P_C_E(t_graph *graph)
+int	ft_check_p_c_e(t_graph *graph)
 {
 	int	player;
 	int	count;
@@ -86,7 +86,7 @@ bool	ft_check_wall(t_graph *graph)
 		if (graph->map[count][0] != '1' \
 				|| graph->map[count][graph->col - 1] != '1')
 			return (false);
-	if (ft_check_P_C_E(graph) != 1 || graph->gate < 1 || graph->gems < 1)
+	if (ft_check_p_c_e(graph) != 1 || graph->gate < 1 || graph->gems < 1)
 		valid = false;
 	return (valid);
 }
@@ -146,8 +146,8 @@ bool	ft_maplen(char *file, t_graph *graph)
 bool	ft_find_path(t_graph *graph, int **visited)
 {
 	int	count;
-	int c_in;
-	int gates;
+	int	c_in;
+	int	gates;
 	int	gems;
 
 	count = -1;
@@ -179,8 +179,8 @@ void	ft_mark_path(t_graph *graph, int row, int col, int **visited)
 	if (graph->map[row][col] != '1' && !visited[row][col])
 	{
 		visited[row][col] = 1;
-		ft_mark_path(graph, row, col +  1, visited);
-		ft_mark_path(graph, row, col -  1, visited);
+		ft_mark_path(graph, row, col + 1, visited);
+		ft_mark_path(graph, row, col - 1, visited);
 		ft_mark_path(graph, row - 1, col, visited);
 		ft_mark_path(graph, row + 1, col, visited);
 	}
@@ -240,7 +240,7 @@ t_graph	*ft_check_map(char *file)
 
 int	main(int argc, char *argv[])
 {
-	t_graph *graph;
+	t_graph	*graph;
 	bool	valid;
 
 	valid = true;
@@ -254,7 +254,7 @@ int	main(int argc, char *argv[])
 		ft_free_2d(graph->map);
 		free(graph);
 	}
-	if(!valid)
+	if (!valid)
 		exit(5 - write(2, "Error\n", 6));
 	else
 		ft_printf("Valid map\n");
