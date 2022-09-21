@@ -6,7 +6,7 @@
 /*   By: melkholy <melkholy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:33:50 by melkholy          #+#    #+#             */
-/*   Updated: 2022/09/20 22:29:28 by melkholy         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:48:20 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,33 @@ int	ft_check_p_c_e(t_graph *graph)
 	return (player);
 }
 
-bool	ft_check_wall(t_graph *graph)
+bool	ft_validate_map(t_graph *graph)
 {
-	int		count;
-	bool	valid;
+	int	count;
+	int	c_in;
 
 	count = -1;
-	valid = true;
-	while (graph->map[0][++count])
+	c_in = -1;
+	while (graph->map[++count])
+	{
+		c_in = -1;
+		while (graph->map[count][++c_in])
+			if (!ft_strchr("01PCE", graph->map[count][c_in]))
+				return (false);
+	}
+	while (--count >= 0)
 		if (graph->map[0][count] != '1')
 			return (false);
-	while (--count >= 0)
+	while (graph->map[0][++count])
 		if (graph->map[graph->row - 1][count] != '1')
 			return (false);
-	while (++count < graph->row - 1)
-		if (graph->map[count][0] != '1' \
-				|| graph->map[count][graph->col - 1] != '1')
+	while (++count - graph->col < graph->row - 1)
+		if (graph->map[count - graph->col][0] != '1' \
+				|| graph->map[count - graph->col][graph->col - 1] != '1')
 			return (false);
 	if (ft_check_p_c_e(graph) != 1 || graph->gate < 1 || graph->gems < 1)
-		valid = false;
-	return (valid);
+		 return (false);
+	return (true);
 }
 
 bool	ft_get_map(char *file, t_graph *graph)
@@ -115,7 +122,7 @@ bool	ft_get_map(char *file, t_graph *graph)
 		if (graph->col != (int)ft_strlen(graph->map[count]))
 			return (false);
 	close(fd);
-	return (ft_check_wall(graph));
+	return (ft_validate_map(graph));
 }
 
 bool	ft_maplen(char *file, t_graph *graph)
@@ -245,7 +252,7 @@ int	main(int argc, char *argv[])
 
 	valid = true;
 	if (argc != 2)
-		exit(5 - write(2, "Error\n", 6));
+		exit(23 - write(2, "Error\nToo few arguments\n", 24));
 	graph = ft_check_map(argv[1]);
 	if (!graph)
 		valid = false;
@@ -255,7 +262,7 @@ int	main(int argc, char *argv[])
 		free(graph);
 	}
 	if (!valid)
-		exit(5 - write(2, "Error\n", 6));
+		exit(22 - write(2, "Error\nMap is not valid\n", 23));
 	else
 		ft_printf("Valid map\n");
 }
