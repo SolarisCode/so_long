@@ -6,7 +6,7 @@
 /*   By: melkholy <melkholy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:33:50 by melkholy          #+#    #+#             */
-/*   Updated: 2022/09/21 20:48:20 by melkholy         ###   ########.fr       */
+/*   Updated: 2022/09/23 16:50:22 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,21 @@ typedef struct s_graph
 	int		gate;
 }			t_graph;
 
-void	ft_free_2d(char **map)
+void	ft_free_graph(t_graph *graph)
 {
 	int	count;
 
 	count = 0;
-	while (map[count])
+	if (graph->map)
 	{
-		free(map[count]);
-		count ++;
+		while (graph->map[count])
+		{
+			free(graph->map[count]);
+			count ++;
+		}
+		free(graph->map);
 	}
-	free(map);
+	free(graph);
 }
 
 int	ft_check_p_c_e(t_graph *graph)
@@ -94,7 +98,7 @@ bool	ft_validate_map(t_graph *graph)
 				|| graph->map[count - graph->col][graph->col - 1] != '1')
 			return (false);
 	if (ft_check_p_c_e(graph) != 1 || graph->gate < 1 || graph->gems < 1)
-		 return (false);
+		return (false);
 	return (true);
 }
 
@@ -116,12 +120,12 @@ bool	ft_get_map(char *file, t_graph *graph)
 		graph->map[count] = ft_strtrim(line, "\n");
 		free(line);
 	}
+	close(fd);
 	graph->row = count;
 	graph->col = ft_strlen(graph->map[0]);
 	while (--count >= 0)
 		if (graph->col != (int)ft_strlen(graph->map[count]))
 			return (false);
-	close(fd);
 	return (ft_validate_map(graph));
 }
 
@@ -143,11 +147,10 @@ bool	ft_maplen(char *file, t_graph *graph)
 		line = get_next_line(fd);
 	}
 	graph->map = (char **)ft_calloc(graph->row + 1, sizeof(char *));
-	graph->map[graph->row] = NULL;
 	if (!graph->map)
 		return (false);
-	else
-		return (true);
+	graph->map[graph->row] = NULL;
+	return (true);
 }
 
 bool	ft_find_path(t_graph *graph, int **visited)
@@ -201,11 +204,10 @@ bool	ft_ispath(t_graph *graph)
 
 	count = 0;
 	valid = true;
-	visited = (int **)calloc(graph->row + 1, sizeof(int *));
-	visited[graph->row] = NULL;
+	visited = (int **)calloc(graph->row, sizeof(int *));
 	while (count < graph->row)
 	{
-		visited[count] = (int *)calloc(graph->col + 1, sizeof(int));
+		visited[count] = (int *)calloc(graph->col, sizeof(int));
 		count ++;
 	}
 	ft_mark_path(graph, graph->player[0], graph->player[1], visited);
@@ -220,29 +222,18 @@ t_graph	*ft_check_map(char *file)
 {
 	t_graph	*graph;
 
+	if (!ft_strnstr(file, ".ber", ft_strlen(file)))
+		return (NULL);
 	graph = (t_graph *)ft_calloc(1, sizeof(t_graph));
 	if (!graph)
 		return (NULL);
-	if (!ft_strnstr(file, ".ber", ft_strlen(file)))
-		return (NULL);
-	if (!ft_maplen(file, graph))
+	if (ft_maplen(file, graph) && ft_get_map(file, graph) && ft_ispath(graph))
+		return (graph);
+	else
 	{
-		free(graph);
+		ft_free_graph(graph);
 		return (NULL);
 	}
-	if (!ft_get_map(file, graph))
-	{
-		ft_free_2d(graph->map);
-		free(graph);
-		return (NULL);
-	}
-	if (!ft_ispath(graph))
-	{
-		ft_free_2d(graph->map);
-		free(graph);
-		return (NULL);
-	}
-	return (graph);
 }
 
 int	main(int argc, char *argv[])
@@ -252,17 +243,14 @@ int	main(int argc, char *argv[])
 
 	valid = true;
 	if (argc != 2)
-		exit(23 - write(2, "Error\nToo few arguments\n", 24));
+		exit(25 - write(2, "Error\nToo few arguments\n", 24));
 	graph = ft_check_map(argv[1]);
 	if (!graph)
 		valid = false;
 	else
-	{
-		ft_free_2d(graph->map);
-		free(graph);
-	}
+		ft_free_graph(graph);
 	if (!valid)
-		exit(22 - write(2, "Error\nMap is not valid\n", 23));
+		exit(24 - write(2, "Error\nMap is not valid\n", 23));
 	else
 		ft_printf("Valid map\n");
 }
