@@ -6,7 +6,7 @@
 /*   By: melkholy <melkholy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 17:03:33 by melkholy          #+#    #+#             */
-/*   Updated: 2022/10/14 10:35:34 by melkholy         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:16:00 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	ft_free_destroy(t_graph *graph)
 	while (++count < 12)
 		mlx_destroy_image(graph->mlx, graph->gol_img[count]);
 	mlx_destroy_window(graph->mlx, graph->win);
-	free(graph->mlx);
 	ft_free_graph(graph);
 	exit(0);
 }

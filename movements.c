@@ -6,7 +6,7 @@
 /*   By: melkholy <melkholy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 00:46:04 by melkholy          #+#    #+#             */
-/*   Updated: 2022/10/14 10:33:48 by melkholy         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:16:10 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	ft_free_destroy(t_graph *graph)
 	mlx_destroy_image(graph->mlx, graph->door[1]);
 	mlx_destroy_image(graph->mlx, graph->ply_img);
 	mlx_destroy_window(graph->mlx, graph->win);
-	free(graph->mlx);
 	ft_free_graph(graph);
 	exit(0);
 }
