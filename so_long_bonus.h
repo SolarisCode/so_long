@@ -6,7 +6,7 @@
 /*   By: melkholy <melkholy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 16:36:32 by melkholy          #+#    #+#             */
-/*   Updated: 2022/10/14 11:39:53 by melkholy         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:59:41 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ typedef struct s_graph
 	void	*win;
 	void	*wall;
 	void	*space;
+	char	last_pos;
 	void	*ply_img[18];
 	void	*gol_img[12];
 	void	*cat_img[2];
 	void	*door[2];
 	int		player[2];
-	char	last_pos;
 	int		img_wh;
 	int		steps;
 	int		row;
