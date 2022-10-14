@@ -6,7 +6,7 @@
 /*   By: melkholy <melkholy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 18:58:22 by melkholy          #+#    #+#             */
-/*   Updated: 2022/09/19 20:35:54 by melkholy         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:44:08 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct	s_queue
+typedef struct s_queue
 {
 	int				row;
 	int				col;
 	struct s_queue	*next;
 }				t_queue;
 
-typedef struct	s_graph
+typedef struct s_graph
 {
 	char	**map;
 	int		**visit;
@@ -104,7 +104,6 @@ void	ft_explore(int row, int col, t_graph *graph)
 		graph->visit[rd][cd] = 1;
 		graph->nx_layer ++;
 	}
-
 }
 
 int	ft_use_queue(char **map, int row, int col, int **visited)
@@ -188,7 +187,7 @@ int	ft_ispath(char **map)
 			if (map[row][col] == 'P' && !visited[row][col])
 			{
 				found = ft_use_queue(map, row, col, visited);
-				break;
+				break ;
 			}
 			col ++;
 		}
@@ -202,10 +201,8 @@ int	ft_ispath(char **map)
 
 int	main(void)
 {
-	
 	char	**str;
 	int		found;
-
 
 	str = (char **)malloc(11 * sizeof(char *));
 	str[0] = "11111111111111111111";

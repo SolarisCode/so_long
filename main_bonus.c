@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melkholy <melkholy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 23:51:00 by melkholy          #+#    #+#             */
-/*   Updated: 2022/10/07 00:28:33 by melkholy         ###   ########.fr       */
+/*   Created: 2022/10/07 16:35:52 by melkholy          #+#    #+#             */
+/*   Updated: 2022/10/07 16:56:30 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 bool	ft_validate_map(t_graph *graph)
 {
@@ -23,7 +23,7 @@ bool	ft_validate_map(t_graph *graph)
 	{
 		c_in = -1;
 		while (graph->map[count][++c_in])
-			if (!ft_strchr("01PCE", graph->map[count][c_in]))
+			if (!ft_strchr("01PGCE", graph->map[count][c_in]))
 				return (ft_printf("Error\nInvalid map character\n"), false);
 	}
 	while (--c_in >= 0)
