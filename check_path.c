@@ -6,7 +6,7 @@
 /*   By: melkholy <melkholy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 00:29:30 by melkholy          #+#    #+#             */
-/*   Updated: 2022/10/07 20:56:46 by melkholy         ###   ########.fr       */
+/*   Updated: 2022/11/05 17:52:14 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ bool	ft_ispath(t_graph *graph)
 
 	count = 0;
 	valid = true;
-	visited = (int **)calloc(graph->row, sizeof(int *));
+	visited = (int **)ft_calloc(graph->row, sizeof(int *));
 	while (count < graph->row)
 	{
-		visited[count] = (int *)calloc(graph->col, sizeof(int));
+		visited[count] = (int *)ft_calloc(graph->col, sizeof(int));
 		count ++;
 	}
 	ft_mark_path(graph, graph->player[0], graph->player[1], visited);
