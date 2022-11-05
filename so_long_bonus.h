@@ -6,7 +6,7 @@
 /*   By: melkholy <melkholy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 16:36:32 by melkholy          #+#    #+#             */
-/*   Updated: 2022/10/14 11:59:41 by melkholy         ###   ########.fr       */
+/*   Updated: 2022/11/05 20:56:57 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,30 +58,41 @@ typedef struct s_graph
 	int		awake;
 }			t_graph;
 
-t_graph	*ft_check_map(char *file);
-bool	ft_maplen(char *file, t_graph *graph);
+/* main_bonus.c */
 bool	ft_get_map(char *file, t_graph *graph);
+bool	ft_maplen(char *file, t_graph *graph);
 bool	ft_validate_map(t_graph *graph);
-int		ft_check_p_c_e(t_graph *graph);
-bool	ft_ispath(t_graph *graph);
+t_graph	*ft_check_map(char *file);
+
+/* check_path_bonus.c */
 void	ft_mark_path(t_graph *graph, int row, int col, int **visited);
 bool	ft_find_path(t_graph *graph, int **visited);
+int		ft_check_p_c_e(t_graph *graph);
 void	ft_free_graph(t_graph *graph);
-void	ft_start_graphics(t_graph *graph);
-void	ft_load_imgs(t_graph *graph);
-void	ft_load_player(t_graph *graph);
-void	ft_load_ply_cat(t_graph *graph);
+bool	ft_ispath(t_graph *graph);
+
+/* build_graphics_bonus.c */
 void	ft_load_wall_door(t_graph *graph);
-void	ft_load_golem(t_graph *graph);
-void	ft_load_map(t_graph *graph);
+void	ft_start_graphics(t_graph *graph);
+void	ft_load_ply_cat(t_graph *graph);
+void	ft_load_player(t_graph *graph);
+void	ft_load_imgs(t_graph *graph);
+
+/* launch_map_bonus.c and linux_launch_map_bonus.c */
 void	ft_put_image(t_graph *graph, void *img, int row, int col);
-void	ft_put_string(t_graph *graph);
-int		ft_key_hook(int keycode, t_graph *graph);
 int		ft_free_destroy(t_graph *graph);
+void	ft_load_golem(t_graph *graph);
+void	ft_put_string(t_graph *graph);
+void	ft_load_map(t_graph *graph);
+
+/* movements_bonus.c */
+void	ft_change_position(t_graph *graph, int row, int col);
 void	ft_move_ply(t_graph *graph, int row, int col);
+int		ft_key_hook(int keycode, t_graph *graph);
 void	ft_check_door(t_graph *graph);
 void	ft_player_die(t_graph *graph);
-void	ft_change_position(t_graph *graph, int row, int col);
+
+/* sprite_bonus.c */
 int		ft_render(t_graph *graph);
 void	ft_walk_through(t_graph *graph, int row, int col);
 
